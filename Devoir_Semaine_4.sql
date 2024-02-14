@@ -25,3 +25,13 @@ HAVING COUNT(DISTINCT titles.title_id) =
 WHERE pub_id = (SELECT pub_id FROM publishers WHERE pub_name = 'Eyrolles'))
 );
     
+-- Question 3 Obtenir la liste des noms d'auteurs ayant touche une avance superieures a toutes les avances versees par l'editeur "Harmattan"
+ 
+SELECT au_fname, au_lname
+FROM authors
+INNER JOIN titleauthor ON authors.au_id = titleauthor.au_id
+INNER JOIN titles ON titleauthor.title_id = titles.title_id
+INNER JOIN publishers ON titles.pub_id = publishers.pub_id
+WHERE publishers.pub_name = 'Harmattan'
+GROUP BY authors.au_id
+HAVING MAX(titles.advance) > (SELECT MAX(advance) FROM titles INNER JOIN publishers ON titles.pub_id = publishers.pub_id WHERE publishers.pub_name = 'Harmattan');
