@@ -210,6 +210,17 @@ FROM
   `user` u
   JOIN `role` r ON u.role_id = r.id;
 
+-- 2- Noms et quantités des produits achetés par Oumar Moussa
+SELECT
+  p.name AS 'Désignation',
+  ol.quantity AS 'Quantité'
+FROM
+  `user` u
+  JOIN `orderline` ol ON u.id = ol.order_id
+  JOIN `product` p ON ol.product_id = p.id
+WHERE
+  u.full_name = 'Oumar Moussa';
+
 
 
 
