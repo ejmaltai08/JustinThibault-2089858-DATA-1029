@@ -221,7 +221,14 @@ FROM
 WHERE
   u.full_name = 'Oumar Moussa';
 
-
+-- 3- Noms de produits dont le fournisseur est basé à Moncton
+SELECT
+  p.name
+FROM
+  `product` p
+  JOIN `supplier` s ON p.supplier_id = s.id
+WHERE
+  s.city = 'Moncton';
 
 
 
